@@ -23,13 +23,15 @@ class Player < ActiveRecord::Base
     
     c.css('table.data tr')[2..(c.css('table.data tr').count - 2)].each do |tr|
       
+      #player_url
+      player_url = tr.css('td a')[0].attributes['href'].value
       #split into player name | team abbr
       info = tr.css('td')[0].text.split(',')
       team = Team.where('abbr=?',info[1][1..(info[1].length-1)]).first
       pos = Position.where('abbr=?',position).first
       player = Player.exists(info[0], team)
       if !player
-        player = Player.new(:name => info[0], :team_id => team.id)
+        player = Player.new(:name => info[0], :team_id => team.id, :url=>'http://fantasynews.cbssports.com'+player_url)
         player.save
       end
       
@@ -50,6 +52,5 @@ class Player < ActiveRecord::Base
     
     
   end
-  
   
 end

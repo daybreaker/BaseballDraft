@@ -3,9 +3,16 @@ class PlayersController < ApplicationController
   # GET /players.xml
   def index
     
-    @players = (params[:position].blank?) ? Player.all : Player.joins(:positions).where('positions.abbr=?', params[:position])
-    @headers = ["FPTS", "AB", "R", "H", "1B", "2B", "3B", "HR", "RBI", "BB", "KO", "SB", "CS", "BA", "OBP", "SLG"] 
+    if params[:position].blank? || params[:position] == 'UTIL'
+      @players = Player.joins(:positions).where('positions.abbr IN ("C", "1B", "2B", "3B", "SS", "OF")')
+    elsif params[:position] == 'P'
+      @players = Player.joins(:positions).where('positions.abbr IN ("SP", "RP")')
+    else 
+      @players = Player.joins(:positions).where('positions.abbr=?', params[:position])
+    end
     
+    @headers = (!params[:position].blank? && (params[:position] == 'P' || params[:position] == 'SP' || params[:position] == 'RP')) ?     ["FPTS", "INN", "GS", "QS", "CG", "W", "L", "S", "BS", "K", "BBI", "HA", "ERA", "WHIP"]: ["FPTS", "AB", "R", "H", "1B", "2B", "3B", "HR", "RBI", "BB", "KO", "SB", "CS", "BA", "OBP", "SLG"] 
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @players }
