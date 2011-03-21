@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  player_id: 1
+  year: 1
+  site: MyString
+  stats_id: 1
+
+two:
+  player_id: 1
+  year: 1
+  site: MyString
+  stats_id: 1

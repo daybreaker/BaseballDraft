@@ -1,0 +1,33 @@
+<%= form_for(@projection) do |f| %>
+  <% if @projection.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@projection.errors.count, "error") %> prohibited this projection from being saved:</h2>
+
+      <ul>
+      <% @projection.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :player_id %><br />
+    <%= f.text_field :player_id %>
+  </div>
+  <div class="field">
+    <%= f.label :year %><br />
+    <%= f.text_field :year %>
+  </div>
+  <div class="field">
+    <%= f.label :site %><br />
+    <%= f.text_field :site %>
+  </div>
+  <div class="field">
+    <%= f.label :stats_id %><br />
+    <%= f.text_field :stats_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

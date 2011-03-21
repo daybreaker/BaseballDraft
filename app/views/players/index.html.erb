@@ -1,0 +1,30 @@
+<h1>Listing players</h1>
+Positions: <% %w(C 1B 2B 3B SS OF SP RP).each do |x| %>
+  <%= link_to x, "/players/position/#{x}" %>
+<% end %>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Team</th>
+    <th>Position</th>
+    <% @headers.each do |h| %>
+      <th><%= h %></th>
+    <% end %>
+  </tr>
+
+<% @players.each do |player| %>
+  <% stats = YAML::load(player.projections.first.stats) %>
+  <tr>
+    <td><%= player.name %></td>
+    <td><%= player.team.name %></td>
+    <td><%= player.position %></td>
+    <% @headers.each do |h| %>
+      <td><%= stats[h] %></td>      
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Player', new_player_path %>
