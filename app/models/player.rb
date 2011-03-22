@@ -14,7 +14,7 @@ class Player < ActiveRecord::Base
   end
   
   
-  
+  #%w(C 1B 2B 3B SS OF SP RP).each{|x| Player.import_cbs_players(x) }
   def self.import_cbs_players(position)
 
     c = Nokogiri::HTML(open("http://fantasynews.cbssports.com/fantasybaseball/stats/sortable/points/#{position}/standard/projections?&print_rows=9999"))

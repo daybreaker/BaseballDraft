@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(:version => 20110322151102) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "url"
-    t.integer  "FPTS"
     t.string   "INN"
     t.string   "GS"
     t.string   "QS"
@@ -73,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20110322151102) do
     t.string   "BA"
     t.string   "OBP"
     t.string   "SLG"
+    t.integer  "FPTS"
   end
 
   add_index "projections", ["player_id"], :name => "index_projections_on_player_id"
