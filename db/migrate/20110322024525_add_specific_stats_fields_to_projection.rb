@@ -11,5 +11,9 @@ class AddSpecificStatsFieldsToProjection < ActiveRecord::Migration
       remove_column :projections, x
     end
     add_column :projections, :stats, :string
+    remove_index :players_positions, :player_id
+     remove_index :players_positions, :position_id
+     remove_index :positions, :abbr
+     remove_index :projections, :player_id
   end
 end
