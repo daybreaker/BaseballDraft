@@ -7,5 +7,9 @@ class AddIndexes < ActiveRecord::Migration
   end
 
   def self.down
+    remove_index players_positions, :player_id
+    remove_index :players_positions, :position_id
+    remove_index :positions, :abbr
+    remove_index :projections, :player_id
   end
 end
