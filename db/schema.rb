@@ -10,19 +10,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110322024525) do
+ActiveRecord::Schema.define(:version => 20110322151102) do
 
   create_table "players", :force => true do |t|
     t.string   "name"
     t.integer  "team_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "url"
   end
 
   create_table "players_positions", :id => false, :force => true do |t|
     t.integer "player_id"
     t.integer "position_id"
   end
+
+  add_index "players_positions", ["player_id"], :name => "index_players_positions_on_player_id"
+  add_index "players_positions", ["position_id"], :name => "index_players_positions_on_position_id"
 
   create_table "positions", :force => true do |t|
     t.string   "name"
@@ -31,6 +35,8 @@ ActiveRecord::Schema.define(:version => 20110322024525) do
     t.datetime "updated_at"
   end
 
+  add_index "positions", ["abbr"], :name => "index_positions_on_abbr"
+
   create_table "projections", :force => true do |t|
     t.integer  "player_id"
     t.integer  "year"
@@ -38,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20110322024525) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "url"
-    t.string   "FPTS"
+    t.integer  "FPTS"
     t.string   "INN"
     t.string   "GS"
     t.string   "QS"
@@ -68,6 +74,8 @@ ActiveRecord::Schema.define(:version => 20110322024525) do
     t.string   "OBP"
     t.string   "SLG"
   end
+
+  add_index "projections", ["player_id"], :name => "index_projections_on_player_id"
 
   create_table "teams", :force => true do |t|
     t.string   "name"

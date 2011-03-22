@@ -1,29 +1,16 @@
 <h1>Listing projections</h1>
-
-<table>
-  <tr>
-    <th>Player</th>
-    <th>Year</th>
-    <th>Site</th>
-    <th>Stats</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @projections.each do |projection| %>
-  <tr>
-    <td><%= projection.player_id %></td>
-    <td><%= projection.year %></td>
-    <td><%= projection.site %></td>
-    <td><%= projection.stats_id %></td>
-    <td><%= link_to 'Show', projection %></td>
-    <td><%= link_to 'Edit', edit_projection_path(projection) %></td>
-    <td><%= link_to 'Destroy', projection, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<% @projections.each do |pos, projections| %>
+<div>
+<h2><%= pos %></h2>
+	<% highest = projections.first.FPTS %>
+	<% projections.each do |p| %>
+		<% if highest - p.FPTS > 70 %>
+			<br />
+			<% highest = p.FPTS %>
+		<% end %>
+		<%= p.FPTS %>
+	<% end %>
+</div>
 <% end %>
-</table>
 
 <br />
-
-<%= link_to 'New Projection', new_projection_path %>

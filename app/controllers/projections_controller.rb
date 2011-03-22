@@ -2,8 +2,9 @@ class ProjectionsController < ApplicationController
   # GET /projections
   # GET /projections.xml
   def index
-    @projections = Projection.all
-
+    @projections = {}
+    Position.all.each{|x| @projections[x.abbr] = Projection.findHighestScoringByPosition(x.abbr, 50) }
+          
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @projections }
