@@ -31,7 +31,7 @@ class Player < ActiveRecord::Base
       pos = Position.where('abbr=?',position).first
       player = Player.exists(info[0], team)
       if !player
-        player = Player.new(:name => info[0], :team_id => team.id, :url=>'http://fantasynews.cbssports.com'+player_url)
+        player = Player.new(:name => info[0], :team_id => team.id)
         player.save
       end
       
@@ -40,12 +40,15 @@ class Player < ActiveRecord::Base
       player_positions = player.positions.find_all{|x| x.abbr == position}
       PlayersPositions.new(:player_id => player.id, :position_id => pos.id).save if player_positions.empty?
       
-      stats = {}
-      headers.each do |h|
-        stats[h] = tr.css('td')[headers.index(h)+1].text
-      end
+      projection = Projection.new(:player_id => player.id, :year => 2011, :site=>'cbs', :url=>'http://fantasynews.cbssports.com'+player_url)
       
-      Projection.new(:player_id => player.id, :year => 2011, :site=>'cbs', :stats => YAML::dump(stats)).save
+      headers.each do |h|
+        oldh = h
+        h = "H" + h if(['1B','2B','3B'].include?(h))
+        projection[h] = tr.css('td')[headers.index(oldh)+1].text
+      end
+      projection.save
+      
       
     end
     

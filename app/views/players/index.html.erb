@@ -13,13 +13,13 @@ Positions: <% %w(C 1B 2B 3B SS OF UTIL SP RP P).each do |x| %>
   </tr>
 
 <% @players.each do |player| %>
-  <% stats = YAML::load(player.projections.first.stats) %>
+  
   <tr>
-    <td><a href="<%= player.url %>"><%= player.name %></a></td>
+    <td><%= player.name %></td>
     <td><%= player.team.name %></td>
     <td><%= player.position %></td>
     <% @headers.each do |h| %>
-      <td><%= stats[h] %></td>      
+      <td><%= player.projections.first[h] %></td>      
     <% end %>
   </tr>
 <% end %>

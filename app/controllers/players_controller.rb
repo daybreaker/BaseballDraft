@@ -11,8 +11,8 @@ class PlayersController < ApplicationController
       @players = Player.joins(:positions).where('positions.abbr=?', params[:position])
     end
     
-    @headers = (!params[:position].blank? && (params[:position] == 'P' || params[:position] == 'SP' || params[:position] == 'RP')) ?     ["FPTS", "INN", "GS", "QS", "CG", "W", "L", "S", "BS", "K", "BBI", "HA", "ERA", "WHIP"]: ["FPTS", "AB", "R", "H", "1B", "2B", "3B", "HR", "RBI", "BB", "KO", "SB", "CS", "BA", "OBP", "SLG"] 
-
+    @headers = (!params[:position].blank? && (['SP','RP','P'].include?(params[:position]))) ?     ["FPTS", "INN", "GS", "QS", "CG", "W", "L", "S", "BS", "K", "BBI", "HA", "ERA", "WHIP"]: ["FPTS", "AB", "R", "H", "H1B", "H2B", "H3B", "HR", "RBI", "BB", "KO", "SB", "CS", "BA", "OBP", "SLG"] 
+    @players = @players.sort_by{|x| x.projections.last.FPTS.to_i}
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @players }

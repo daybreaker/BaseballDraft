@@ -1,5 +1,7 @@
-1300679843
+1300764423
 AddAbbrToTeams	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110321012135_add_abbr_to_teams.rb	class AddAbbrToTeams 
+AddFieldsToProjection	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322024131_add_fields_to_projection.rb	class AddFieldsToProjection 
+AddSpecificStatsFieldsToProjection	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322024525_add_specific_stats_fields_to_projection.rb	class AddSpecificStatsFieldsToProjection 
 AddStatsToProjections	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110321014758_add_stats_to_projections.rb	class AddStatsToProjections 
 Application	/home/daybreaker/Shared/BaseballDraft/config/application.rb	  class Application 
 ApplicationController	/home/daybreaker/Shared/BaseballDraft/app/controllers/application_controller.rb	class ApplicationController 
@@ -57,6 +59,8 @@ down	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110320173936_remove_extr
 down	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110321012135_add_abbr_to_teams.rb	  def self.down
 down	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110321014758_add_stats_to_projections.rb	  def self.down
 down	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110321014828_remove_stats_id_from_projections.rb	  def self.down
+down	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322024131_add_fields_to_projection.rb	  def self.down
+down	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322024525_add_specific_stats_fields_to_projection.rb	  def self.down
 edit	/home/daybreaker/Shared/BaseballDraft/app/controllers/players_controller.rb	  def edit
 edit	/home/daybreaker/Shared/BaseballDraft/app/controllers/positions_controller.rb	  def edit
 edit	/home/daybreaker/Shared/BaseballDraft/app/controllers/projections_controller.rb	  def edit
@@ -86,6 +90,8 @@ up	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110320173936_remove_extra_
 up	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110321012135_add_abbr_to_teams.rb	  def self.up
 up	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110321014758_add_stats_to_projections.rb	  def self.up
 up	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110321014828_remove_stats_id_from_projections.rb	  def self.up
+up	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322024131_add_fields_to_projection.rb	  def self.up
+up	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322024525_add_specific_stats_fields_to_projection.rb	  def self.up
 update	/home/daybreaker/Shared/BaseballDraft/app/controllers/players_controller.rb	  def update
 update	/home/daybreaker/Shared/BaseballDraft/app/controllers/positions_controller.rb	  def update
 update	/home/daybreaker/Shared/BaseballDraft/app/controllers/projections_controller.rb	  def update
