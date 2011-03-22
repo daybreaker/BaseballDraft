@@ -4,15 +4,15 @@ class PlayersController < ApplicationController
   def index
     
     if params[:position].blank? || params[:position] == 'UTIL'
-      @players = Player.joins(:positions).where('positions.abbr IN ("C", "1B", "2B", "3B", "SS", "OF")')
+      @players = Player.joins(:positions, :projections).where('positions.abbr IN ("C", "1B", "2B", "3B", "SS", "OF")').order('CAST(projections.FPTS as SIGNED) desc').limit(20)
     elsif params[:position] == 'P'
-      @players = Player.joins(:positions).where('positions.abbr IN ("SP", "RP")')
+      @players = Player.joins(:positions, :projections).where('positions.abbr IN ("SP", "RP")').order('CAST(projections.FPTS as SIGNED) desc').limit(20)
     else 
-      @players = Player.joins(:positions).where('positions.abbr=?', params[:position])
+      @players = Player.joins(:positions, :projections).where('positions.abbr=?', params[:position]).order('CAST(projections.FPTS as SIGNED) desc').limit(20)
     end
     
     @headers = (!params[:position].blank? && (['SP','RP','P'].include?(params[:position]))) ?     ["FPTS", "INN", "GS", "QS", "CG", "W", "L", "S", "BS", "K", "BBI", "HA", "ERA", "WHIP"]: ["FPTS", "AB", "R", "H", "H1B", "H2B", "H3B", "HR", "RBI", "BB", "KO", "SB", "CS", "BA", "OBP", "SLG"] 
-    @players = @players.sort_by{|x| x.projections.last.FPTS.to_i}
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @players }
