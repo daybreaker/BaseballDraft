@@ -40,20 +40,17 @@ class Player < ActiveRecord::Base
       player_positions = player.positions.find_all{|x| x.abbr == position}
       PlayersPositions.new(:player_id => player.id, :position_id => pos.id).save if player_positions.empty?
       
-      projection = Projection.new(:player_id => player.id, :year => 2011, :site=>'cbs', :url=>'http://fantasynews.cbssports.com'+player_url)
+      if Projection.where('site=? AND player_id=?','cbs',player.id).blank?
+        projection = Projection.new(:player_id => player.id, :year => 2011, :site=>'cbs', :url=>'http://fantasynews.cbssports.com'+player_url)
       
-      headers.each do |h|
-        oldh = h
-        h = "H" + h if(['1B','2B','3B'].include?(h))
-        projection[h] = tr.css('td')[headers.index(oldh)+1].text
+        headers.each do |h|
+          oldh = h
+          h = "H" + h if(['1B','2B','3B'].include?(h))
+          projection[h] = tr.css('td')[headers.index(oldh)+1].text
+        end
+        projection.save
       end
-      projection.save
-      
-      
-    end
-    
-    
-    
+    end      
   end
   
 end

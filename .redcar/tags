@@ -1,6 +1,7 @@
-1300764423
+1300880058
 AddAbbrToTeams	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110321012135_add_abbr_to_teams.rb	class AddAbbrToTeams 
 AddFieldsToProjection	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322024131_add_fields_to_projection.rb	class AddFieldsToProjection 
+AddIndexes	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322150516_add_indexes.rb	class AddIndexes 
 AddSpecificStatsFieldsToProjection	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322024525_add_specific_stats_fields_to_projection.rb	class AddSpecificStatsFieldsToProjection 
 AddStatsToProjections	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110321014758_add_stats_to_projections.rb	class AddStatsToProjections 
 Application	/home/daybreaker/Shared/BaseballDraft/config/application.rb	  class Application 
@@ -8,6 +9,7 @@ ApplicationController	/home/daybreaker/Shared/BaseballDraft/app/controllers/appl
 ApplicationHelper	/home/daybreaker/Shared/BaseballDraft/app/helpers/application_helper.rb	module ApplicationHelper
 BaseballDraft	/home/daybreaker/Shared/BaseballDraft/config/application.rb	module BaseballDraft
 BrowsingTest	/home/daybreaker/Shared/BaseballDraft/test/performance/browsing_test.rb	class BrowsingTest 
+ChangeFptsType	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322151102_change_fpts_type.rb	class ChangeFptsType 
 CreatePlayers	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110320165920_create_players.rb	class CreatePlayers 
 CreatePlayersPositions	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110320172216_create_players_positions.rb	class CreatePlayersPositions 
 CreatePositions	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110320170049_create_positions.rb	class CreatePositions 
@@ -61,11 +63,14 @@ down	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110321014758_add_stats_t
 down	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110321014828_remove_stats_id_from_projections.rb	  def self.down
 down	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322024131_add_fields_to_projection.rb	  def self.down
 down	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322024525_add_specific_stats_fields_to_projection.rb	  def self.down
+down	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322150516_add_indexes.rb	  def self.down
+down	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322151102_change_fpts_type.rb	  def self.down
 edit	/home/daybreaker/Shared/BaseballDraft/app/controllers/players_controller.rb	  def edit
 edit	/home/daybreaker/Shared/BaseballDraft/app/controllers/positions_controller.rb	  def edit
 edit	/home/daybreaker/Shared/BaseballDraft/app/controllers/projections_controller.rb	  def edit
 edit	/home/daybreaker/Shared/BaseballDraft/app/controllers/teams_controller.rb	  def edit
 exists	/home/daybreaker/Shared/BaseballDraft/app/models/player.rb	  def self.exists
+findHighestScoringByPosition	/home/daybreaker/Shared/BaseballDraft/app/models/projection.rb	  def self.findHighestScoringByPosition
 import_cbs_players	/home/daybreaker/Shared/BaseballDraft/app/models/player.rb	  def self.import_cbs_players
 index	/home/daybreaker/Shared/BaseballDraft/app/controllers/players_controller.rb	  def index
 index	/home/daybreaker/Shared/BaseballDraft/app/controllers/positions_controller.rb	  def index
@@ -92,6 +97,8 @@ up	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110321014758_add_stats_to_
 up	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110321014828_remove_stats_id_from_projections.rb	  def self.up
 up	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322024131_add_fields_to_projection.rb	  def self.up
 up	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322024525_add_specific_stats_fields_to_projection.rb	  def self.up
+up	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322150516_add_indexes.rb	  def self.up
+up	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322151102_change_fpts_type.rb	  def self.up
 update	/home/daybreaker/Shared/BaseballDraft/app/controllers/players_controller.rb	  def update
 update	/home/daybreaker/Shared/BaseballDraft/app/controllers/positions_controller.rb	  def update
 update	/home/daybreaker/Shared/BaseballDraft/app/controllers/projections_controller.rb	  def update

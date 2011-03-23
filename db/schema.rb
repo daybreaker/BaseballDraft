@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(:version => 20110322151102) do
     t.integer  "team_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "url"
   end
 
   create_table "players_positions", :id => false, :force => true do |t|

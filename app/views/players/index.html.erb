@@ -2,29 +2,30 @@
 Positions: <% %w(C 1B 2B 3B SS OF UTIL SP RP P).each do |x| %>
   <%= link_to x, "/players/position/#{x}" %>
 <% end %>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Team</th>
-    <th>Position</th>
-    <% @headers.each do |h| %>
-      <th><%= h %></th>
-    <% end %>
-  </tr>
+
 
 <% @players.each do |player| %>
-  
-  <tr>
-    <td><%= player.name %></td>
-    <td><%= player.team.name %></td>
-    <td><%= player.position %></td>
-    <% @headers.each do |h| %>
-      <td><%= player.projections.first[h] %></td>      
-    <% end %>
-  </tr>
+<div class="player" style="clear:left;">
+  <div class="player_info" style="float:left">
+    <h3><%= player.name %> -- <%= player.position %></h3>
+    <h4><%= player.team.name %></h4>
+  </div>
+  <div class="stats" style = "float:left">
+    <table>
+      <tr>
+        <% @headers.each do |h| %>
+          <th><%= h %></th>
+        <% end %>
+      </tr>
+      <% player.projections.each do |proj| %>
+        <tr>
+          <% @headers.each do |h| %>
+            <td><%= proj[h] %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 <% end %>
-</table>
 
 <br />
-
-<%= link_to 'New Player', new_player_path %>
