@@ -1,16 +1,15 @@
-<h1>Listing players</h1>
+<div id="players_header"><h1>Listing players</h1>
 Positions: <% %w(C 1B 2B 3B SS OF UTIL SP RP P).each do |x| %>
   <%= link_to x, "/players/position/#{x}" %>
 <% end %>
-
+</div>
 
 <% @players.each do |player| %>
 <div class="player" style="clear:left;">
-  <div class="player_info" style="float:left">
-    <h3><%= player.name %> -- <%= player.position %></h3>
-    <h4><%= player.team.name %></h4>
+  <div class="player_info">
+    <h3><%= player.name %> -- <%= player.position %> -- <%= player.team.name %>
   </div>
-  <div class="stats" style = "float:left">
+  <div class="stats">
     <table>
       <tr>
         <% @headers.each do |h| %>
@@ -26,6 +25,7 @@ Positions: <% %w(C 1B 2B 3B SS OF UTIL SP RP P).each do |x| %>
       <% end %>
     </table>
   </div>
+</div>
 <% end %>
 
-<br />
+<br class="clear:left" />

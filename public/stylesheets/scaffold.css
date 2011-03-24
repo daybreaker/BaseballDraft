@@ -54,3 +54,21 @@ div.field, div.actions {
   font-size: 12px;
   list-style: square;
 }
+
+div#players_header{
+	padding: 5px 0 30px;
+}
+
+div.player, div#players_header{
+	margin: 0 auto;
+	width: 800px;
+}
+
+div.player{
+	margin-bottom: 10px;
+	padding: 5px;
+	border: 1px solid black;
+}
+
+div.player_info{
+}
