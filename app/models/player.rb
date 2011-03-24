@@ -13,6 +13,49 @@ class Player < ActiveRecord::Base
     positions.collect(&:abbr).join(', ')
   end
   
+  def self.import_fftoolbox_players(position)
+    
+    stats_map = {"AVG" => "BA"}
+  
+    c = Nokogiri::HTML(open("http://www.fftoolbox.com/baseball/2011/fantasy-baseball-rankings.cfm?pos=#{position}"))
+    
+    rows = c.css('table.projections tr')
+
+    headers = rows[0].css('th')[4..(rows[0].css('th').length-1)].collect(&:text)
+  
+    rows[1..rows.length-1].each do |row|
+      
+      #get player URL
+      player_url = row.css('td')[1].css('a')[0].attributes['href'].text
+    
+      #get player name & team      
+      team = Team.where('abbr=?',row.css('td')[3].text).first      
+      pos = Position.where('abbr=?',position).first
+      player = Player.exists(row.css('td')[1].text, team)
+    
+    
+      if !player
+        player = Player.new(:name => row.css('td')[1].text, :team_id => team.id)
+        player.save
+      end
+      
+      player_positions = player.positions.find_all{|x| x.abbr == position}
+      PlayersPositions.new(:player_id => player.id, :position_id => pos.id).save if player_positions.empty?
+      
+      if Projection.where('site=? AND player_id=?','fftoolbox',player.id).blank?
+        projection = Projection.new(:player_id => player.id, :year => 2011, :site=>'fftoolbox', :url => 'http://www.fftoolbox.com' + player_url)
+      
+        headers.each do |h|   
+          stats_key = stats_map.keys.include?(h) ? stats_map[h] : h
+          projection[stats_key] = row.css('td')[headers.index(h)+4].text
+        end
+        projection.save
+      end
+      
+    end
+    
+  end
+    
   def self.import_kffl_players(position)
     
     stats_map = {   
@@ -44,8 +87,6 @@ class Player < ActiveRecord::Base
         player = Player.new(:name => row.css('td')[0].text, :team_id => team.id)
         player.save
       end
-      
-      
       
       player_positions = player.positions.find_all{|x| x.abbr == position}
       PlayersPositions.new(:player_id => player.id, :position_id => pos.id).save if player_positions.empty?

@@ -1,4 +1,4 @@
-1300934542
+1300937960
 AddAbbrToTeams	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110321012135_add_abbr_to_teams.rb	class AddAbbrToTeams 
 AddFieldsToProjection	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322024131_add_fields_to_projection.rb	class AddFieldsToProjection 
 AddIndexes	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322150516_add_indexes.rb	class AddIndexes 
@@ -72,6 +72,7 @@ edit	/home/daybreaker/Shared/BaseballDraft/app/controllers/teams_controller.rb	 
 exists	/home/daybreaker/Shared/BaseballDraft/app/models/player.rb	  def self.exists
 findHighestScoringByPosition	/home/daybreaker/Shared/BaseballDraft/app/models/projection.rb	  def self.findHighestScoringByPosition
 import_cbs_players	/home/daybreaker/Shared/BaseballDraft/app/models/player.rb	  def self.import_cbs_players
+import_fftoolbox_players	/home/daybreaker/Shared/BaseballDraft/app/models/player.rb	  def self.import_fftoolbox_players
 import_kffl_players	/home/daybreaker/Shared/BaseballDraft/app/models/player.rb	  def self.import_kffl_players
 index	/home/daybreaker/Shared/BaseballDraft/app/controllers/players_controller.rb	  def index
 index	/home/daybreaker/Shared/BaseballDraft/app/controllers/positions_controller.rb	  def index
