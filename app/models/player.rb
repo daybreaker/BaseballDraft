@@ -13,6 +13,58 @@ class Player < ActiveRecord::Base
     positions.collect(&:abbr).join(', ')
   end
   
+  def self.import_kffl_players(position)
+    
+    stats_map = {   
+      "SV" => "S",
+      "IP" => "INN",
+      "H" => "HA",      
+      "BB" => "BBI"      
+    }
+    
+    c = Nokogiri::HTML(open("http://www.kffl.com/fantasy-baseball/fantasy-baseball-projections.php?fLeague=MIXED&fPosition=#{position}&order_col=&order_colprev=pit_w&order_down=1&doexport=print"))
+    
+    rows = c.css('table table tr')
+
+    headers = rows[0].css('td b')[2..(rows[0].css('td b').length-1)].collect(&:text)
+    
+    rows[1..rows.length-1].each do |row|
+      
+      #get player URL
+      #player_url = row.css('td a')[0].attributes['href'].value
+      
+      #get player name & team
+      team_map = {'LAD' => 'LA', 'LAA' => 'ANA', 'WSH' => 'WAS', 'CWS' => "CHW"}
+      team_abbr = team_map.keys.include?(row.css('td')[1].text) ? team_map[row.css('td')[1].text] : row.css('td')[1].text
+      team = Team.where('abbr=?',team_abbr).first      
+      pos = Position.where('abbr=?',position).first
+      player = Player.exists(row.css('td')[0].text, team)
+      
+      if !player
+        player = Player.new(:name => row.css('td')[0].text, :team_id => team.id)
+        player.save
+      end
+      
+      
+      
+      player_positions = player.positions.find_all{|x| x.abbr == position}
+      PlayersPositions.new(:player_id => player.id, :position_id => pos.id).save if player_positions.empty?
+      
+      if Projection.where('site=? AND player_id=?','kffl',player.id).blank?
+        projection = Projection.new(:player_id => player.id, :year => 2011, :site=>'kffl')
+      
+        headers.each do |h|   
+          stats_key = stats_map.keys.include?(h) ? stats_map[h] : h
+          projection[stats_key] = row.css('td')[headers.index(h)+2].text
+        end
+        projection.save
+      end
+      
+      
+      
+    end
+  end
+  
   
   #%w(C 1B 2B 3B SS OF SP RP).each{|x| Player.import_cbs_players(x) }
   def self.import_cbs_players(position)
