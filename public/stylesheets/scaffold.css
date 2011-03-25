@@ -60,15 +60,27 @@ div#players_header{
 }
 
 div.player, div#players_header{
-	margin: 0 auto;
-	width: 800px;
+	margin: 0 0 0 100px;
+  display: block;
+
 }
 
-div.player{
+
+div.player_container{
+  display: inline-block;
 	margin-bottom: 10px;
 	padding: 5px;
 	border: 1px solid black;
+  min-width:400px;
 }
 
 div.player_info{
+}
+
+th,td{
+  padding: 2px 5px;
+}
+
+.individual_tr, .secondary_stats{
+  display: none;
 }

@@ -6,24 +6,41 @@ Positions: <% %w(C 1B 2B 3B SS OF UTIL SP RP P).each do |x| %>
 
 <% @players.each do |player| %>
 <div class="player" style="clear:left;">
+  <div class="player_container">
   <div class="player_info">
     <h3><%= player.name %> -- <%= player.position %> -- <%= player.team.name %>
   </div>
   <div class="stats">
     <table>
       <tr>
-        <% @headers.each do |h| %>
+        <% @headers_main.each do |h| %>
           <th><%= h %></th>
         <% end %>
+        <% @headers_secondary.each do |h| %>
+          <th class="secondary_stats"><%= h %></th>
+        <% end %>
+        
+      </tr>
+      <tr>
+        <% @headers_main.each do |h| %>
+          <td><%= number_to_human(player.projections.average(h)) %></td>
+          <% end %>
+        <% @headers_secondary.each do |h| %>
+          <td class="secondary_stats"><%= number_to_human(player.projections.average(h)) %></td>
+          <% end %>
       </tr>
       <% player.projections.each do |proj| %>
-        <tr>
-          <% @headers.each do |h| %>
+        <tr class="individual_tr">
+          <% @headers_main.each do |h| %>
             <td><%= proj[h] %></td>
+          <% end %>
+          <% @headers_secondary.each do |h| %>
+            <td class="secondary_stats"><%= proj[h] %></td>
           <% end %>
         </tr>
       <% end %>
     </table>
+  </div>
   </div>
 </div>
 <% end %>

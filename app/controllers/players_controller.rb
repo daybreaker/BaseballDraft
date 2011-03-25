@@ -11,7 +11,19 @@ class PlayersController < ApplicationController
       @players = Player.joins(:positions, :projections).where('positions.abbr=?', params[:position]).order('projections.FPTS desc').limit(20)
     end
     
-    @headers = (!params[:position].blank? && (['SP','RP','P'].include?(params[:position]))) ?     ["FPTS", "INN", "GS", "QS", "CG", "W", "L", "S", "BS", "K", "BBI", "HA", "ERA", "WHIP"]: ["FPTS", "AB", "R", "H", "H1B", "H2B", "H3B", "HR", "RBI", "BB", "KO", "SB", "CS", "BA", "OBP", "SLG"] 
+    if (!params[:position].blank? && (['SP','RP','P'].include?(params[:position])))
+      @headers_main =  ["W", "ERA", "WHIP", "K", "S", "INN"]
+      @headers_secondary = ["GS", "QS", "CG", "L", "BS", "BBI", "HA"]
+      @players.sort!{|x, y| @headers_main.inject(0){|sum, w| sum + y.projections.average(w) } <=> @headers_main.inject(0){|sum, w| sum + x.projections.average(w) } }
+    
+    else
+      @headers_main = ["BA", "R", "HR", "RBI", "SB"]
+      @headers_secondary =  ["AB", "BB", "H", "H1B", "H2B", "H3B", "KO", "CS", "OBP", "SLG"]
+      @players.sort!{|x, y| @headers_main.inject(0){|sum, w| sum + y.projections.average(w) } <=> @headers_main.inject(0){|sum, w| sum + x.projections.average(w) } }
+    end
+      
+   
+
 
     respond_to do |format|
       format.html # index.html.erb

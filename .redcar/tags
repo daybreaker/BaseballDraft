@@ -1,4 +1,4 @@
-1300937960
+1301014276
 AddAbbrToTeams	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110321012135_add_abbr_to_teams.rb	class AddAbbrToTeams 
 AddFieldsToProjection	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322024131_add_fields_to_projection.rb	class AddFieldsToProjection 
 AddIndexes	/home/daybreaker/Shared/BaseballDraft/db/migrate/20110322150516_add_indexes.rb	class AddIndexes 
